@@ -28,6 +28,7 @@ public class FormsPage {
     private By currAddress = By.id("currentAddress");
     private By state = By.xpath("//div[@id='state']//input");
     private By city = By.xpath("//div[@id='city']//input");
+    private By submit = By.xpath("//button[@id='submit']");
 
     public FormsPage(WebDriver driver){
         this.driver = driver;
@@ -75,6 +76,9 @@ public class FormsPage {
     public void setCity(String cityValue){
         driver.findElement(city).sendKeys(cityValue);
         driver.findElement(city).sendKeys(Keys.ENTER);
+    }
+    public void submit(){
+        driver.findElement(submit).click();
     }
 
 

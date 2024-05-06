@@ -9,10 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FormsTest {
     WebDriver driver;
     FormsPage formsPage;
+    SubmittedForm sbmForm;
     JavascriptExecutor jse;
     private final String PATH = "C:\\Work\\selenium\\demoqaselenium\\src\\Upload\\testFile1.txt";
     private String address = "Hello World!\nHave a good day!";
@@ -25,6 +27,8 @@ public class FormsTest {
         formsPage = new FormsPage(driver);
         jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,600)");
+        sbmForm = new SubmittedForm(driver);
+
     }
     @AfterEach
     public void close(){
@@ -50,5 +54,8 @@ public class FormsTest {
         formsPage.setCurAddress(address);
         formsPage.setState("NCR");
         formsPage.setCity("Noida");
+        formsPage.submit();
+        assertEquals("Thanks for submitting the form", sbmForm.getTitle(), "Error : title was not found or different");
+        assertEquals("FirstName" + " " + "LastName", sbmForm.getSubmittedName(), "Error : names were not found or different");
     }
 }
