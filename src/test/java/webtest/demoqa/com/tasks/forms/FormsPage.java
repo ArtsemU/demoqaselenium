@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import webtest.enums.Gender;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class FormsPage {
     private By fname = By.xpath("//input[@id='firstName']");
     private By lname = By.xpath("//input[@id='lastName']");
     private By email = By.xpath("//input[@id='userEmail']");
-    private By rbMale = By.xpath("//input[@value='Male']/following-sibling::label");
+    private String genderLocator = "//input[@value='%s']/following-sibling::label";
     private By rbFemale = By.xpath("//input[@value='Female']");
     private By rbOther = By.xpath("//input[@value='Other']");
     private By mobNum = By.xpath("//input[@id='userNumber']");
@@ -46,15 +47,16 @@ public class FormsPage {
     public void setMobNum(String num){
         driver.findElement(mobNum).sendKeys(num);
     }
-    public void setGenderMale(){
-        driver.findElement(rbMale).click();
+    public void setGenderMale(Gender gender){
+        driver.findElement(By.xpath(String.format(genderLocator, gender.getValue()))).click();
     }
     public void setDob(){
-        driver.findElement(dob).clear();
-        driver.findElement(dob).sendKeys("01MAY10");
+        driver.findElement(dob).sendKeys(Keys.chord(Keys.CONTROL, "A"));
+        driver.findElement(dob).sendKeys("01MAY2010");
         driver.findElement(dob).sendKeys(Keys.ENTER);
     }
     public void setSubject(String sbj){
+        // TODO : Expand to handle multiple subjects
         driver.findElement(subject).sendKeys(sbj);
         driver.findElement(subject).sendKeys(Keys.ENTER);
     }

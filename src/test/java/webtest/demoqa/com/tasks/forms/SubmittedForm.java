@@ -28,5 +28,33 @@ public class SubmittedForm {
     public String getSubmittedName(){
         return driver.findElement(submittedName).getText();
     }
+    public String getSubmittedEmail(){
+        return driver.findElement(submittedEmail).getText();
+    }
+    public String getGender(){
+        return driver.findElement(submittedGender).getText();
+    }
+    public String getNumber(){
+        return driver.findElement(submittedMobile).getText();
+    }
+    public String getDob(){
+        return driver.findElement(submittedDob).getText();
+    }
+    public String getSbj(){
+        // TODO : Expand to handle multiple subjects
+        return driver.findElement(submittedSubjects).getText();
+    }
+    public String getHobby(){
+        return driver.findElement(submittedHobbies).getText();
+    }
+    public String getFileName(){
+        return driver.findElement(submittedPicture).getText();
+    }
+    public String getAddress(){
+        return driver.findElement(submittedAddress).getText();
+    }
+    public String getStateCity(){
+        return driver.findElement(submittedStateCity).getText();
+    }
 
 }
