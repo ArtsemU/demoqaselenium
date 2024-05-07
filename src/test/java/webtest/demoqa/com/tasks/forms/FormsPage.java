@@ -51,11 +51,12 @@ public class FormsPage {
         driver.findElement(By.xpath(String.format(genderLocator, gender.getValue()))).click();
     }
     public void setDob(){
-        driver.findElement(dob).clear();
-        driver.findElement(dob).sendKeys("01MAY10");
+        driver.findElement(dob).sendKeys(Keys.chord(Keys.CONTROL, "A"));
+        driver.findElement(dob).sendKeys("01MAY2010");
         driver.findElement(dob).sendKeys(Keys.ENTER);
     }
     public void setSubject(String sbj){
+        // TODO : Expand to handle multiple subjects
         driver.findElement(subject).sendKeys(sbj);
         driver.findElement(subject).sendKeys(Keys.ENTER);
     }
