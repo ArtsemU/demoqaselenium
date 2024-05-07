@@ -28,5 +28,11 @@ public class SubmittedForm {
     public String getSubmittedName(){
         return driver.findElement(submittedName).getText();
     }
+    public String getSubmittedEmail(){
+        return driver.findElement(submittedEmail).getText();
+    }
+    public String getGender(){
+        return driver.findElement(submittedGender).getText();
+    }
 
 }

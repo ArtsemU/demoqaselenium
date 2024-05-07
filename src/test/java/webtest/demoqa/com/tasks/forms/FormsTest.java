@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import webtest.enums.Gender;
 
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,8 @@ public class FormsTest {
     SubmittedForm sbmForm;
     JavascriptExecutor jse;
     private final String PATH = "C:\\Work\\selenium\\demoqaselenium\\src\\Upload\\testFile1.txt";
-    private String address = "Hello World!\nHave a good day!";
+    private final String address = "Hello World!\nHave a good day!";
+    private final String TITLE = "Thanks for submitting the form";
     @BeforeEach
     public void setUp(){
         driver = new ChromeDriver();
@@ -44,7 +46,7 @@ public class FormsTest {
         formsPage.setFName("FirstName");
         formsPage.setLName("LastName");
         formsPage.setEmail("email@gmail.com");
-        formsPage.setGenderMale();
+        formsPage.setGenderMale(Gender.MALE);
         formsPage.setMobNum("1234567890");
         formsPage.setDob();
         formsPage.setSubject("English");
@@ -55,7 +57,11 @@ public class FormsTest {
         formsPage.setState("NCR");
         formsPage.setCity("Noida");
         formsPage.submit();
-        assertEquals("Thanks for submitting the form", sbmForm.getTitle(), "Error : title was not found or different");
-        assertEquals("FirstName" + " " + "LastName", sbmForm.getSubmittedName(), "Error : names were not found or different");
+        assertEquals(TITLE, sbmForm.getTitle(), String.format("Expected title: %s, but received: %s", TITLE, sbmForm.getTitle()));
+        assertEquals("FirstName LastName", sbmForm.getSubmittedName(), "Expected name: FirstName LastName, but received: " + sbmForm.getSubmittedName());
+        assertEquals("email@gmail.com", sbmForm.getSubmittedEmail(), "Expected email: email@gmail.com, but received: " + sbmForm.getSubmittedEmail());
+        assertEquals(Gender.MALE.getValue(), sbmForm.getGender(), String.format("Expected gender: %s, but received: %s", Gender.MALE.getValue(), sbmForm.getGender()));
+
+
     }
 }
