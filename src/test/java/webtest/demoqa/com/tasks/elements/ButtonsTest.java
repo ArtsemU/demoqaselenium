@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +20,11 @@ public class ButtonsTest {
     private final String doubleClickText = "You have done a double click";
     private final String rightClickText = "You have done a right click";
     private final String dynamicClickText = "You have done a dynamic click";
+    private static final Logger logger = LogManager.getLogger(ButtonsTest.class);
 
     @BeforeEach
     public  void setUp(){
+        logger.info("Starting setup test method");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -31,6 +35,7 @@ public class ButtonsTest {
     }
     @AfterEach
     public void quit(){
+        logger.info("Quit");
         if (driver != null) {
             driver.quit();
         }
@@ -39,12 +44,14 @@ public class ButtonsTest {
     @Test
     @DisplayName("Test : double click on a button")
     public void testLeftClick(){
+        logger.info("Test started : double click on a button");
         buttonsPage.clickOnDouble();
         assertEquals(buttonsPage.getDoubleClickMessage(), doubleClickText, "Expected text for double click");
     }
     @Test
     @DisplayName("Test : right click")
     public void testRightClick(){
+
         buttonsPage.clickOnRight();
         assertEquals(buttonsPage.getRightClickMessage(), rightClickText, "Expected text for right click");
     }
