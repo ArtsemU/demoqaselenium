@@ -1,4 +1,4 @@
-package webtest.demoqa.com.tasks.elements;
+package webtest.demoqa.com.tasks.elements.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

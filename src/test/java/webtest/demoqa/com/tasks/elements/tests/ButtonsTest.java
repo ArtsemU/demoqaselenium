@@ -1,4 +1,4 @@
-package webtest.demoqa.com.tasks.elements;
+package webtest.demoqa.com.tasks.elements.tests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import webtest.demoqa.com.tasks.elements.pages.ButtonsPage;
 
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
