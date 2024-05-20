@@ -1,8 +1,10 @@
-package webtest.demoqa.com.tasks.elements;
+package webtest.demoqa.com.tasks.elements.tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import webtest.demoqa.com.tasks.elements.pages.TextBoxPage;
+
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
