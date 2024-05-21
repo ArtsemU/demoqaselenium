@@ -1,5 +1,7 @@
 package webtest.demoqa.com.tasks.elements.tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,69 +19,80 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TabledivTest {
-    WebDriver driver;
+public class TabledivTest extends BaseTest{
     List<Webtable> table;
     TabledivPage tabledivPage;
-    JavascriptExecutor jse;
+    private static final Logger logger = LogManager.getLogger(TabledivTest.class);
 
     @BeforeEach
-    public  void setUp(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void setUp(){
+        logger.info("Setup method BeforeEach");
+        super.setUp();
         driver.get("https://demoqa.com/webtables");
-        jse = (JavascriptExecutor)driver;
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
         tabledivPage = new TabledivPage(driver);
         jse.executeScript("window.scrollBy(0,300)");
-    }
-    @AfterEach
-    public void close(){
-        driver.quit();
     }
 
     @Test
     @DisplayName("Test : read default table")
     public void testReadTable(){
+        logger.info("Test testReadTable started");
         table = tabledivPage.refreshTable();
         int count = table.size();
-        assertEquals(count, 3, "Expected value 3 - default numbers rows");    }
+        logger.info("Count :" + count);
+        assertEquals(count, 3, "Expected value 3 - default numbers rows");
+        logger.info("Test testReadTable finished");
+    }
 
     @Test
     @DisplayName("Test : add one row")
     public void testAddNewRow(){
+        logger.info("Test testAddNewRow started");
         tabledivPage.fillInRegForm();
         table = tabledivPage.refreshTable();
         int count = table.size();
+        logger.info("table size :" + count);
         assertEquals(count, 4, "Expected value 4");
+        logger.info("Test testAddNewRow finished");
     }
     @Test
     @DisplayName("Test : remove a row")
     public void testRemoveRow(){
+        logger.info("Test testRemoveRow started");
         table = tabledivPage.refreshTable();
         tabledivPage.removeRow(table.get(0).getAction());
-        assertEquals(tabledivPage.refreshTable().size(), 2, "One row was deleted. Expected in total : 2");
+        int count = tabledivPage.refreshTable().size();
+        logger.info("Count :" + count);
+        assertEquals(count, 2, "One row was deleted. Expected in total : 2");
+        logger.info("Test testRemoveRow finished");
     }
     @Test
     @DisplayName("Test : update name in first row")
     public void testUpdateCell(){
-        String updatedName = "Mikasa";
+        logger.info("Test testUpdateCell finished");
+        String updatedName = "NewName";
         table = tabledivPage.refreshTable();
         tabledivPage.updateRow(table.get(0).getAction());
         tabledivPage.updateFName(updatedName);
         table = tabledivPage.refreshTable();
-        assertEquals(table.get(0).getFirstName(), updatedName, "Expected updated First name");
+        String name = table.get(0).getFirstName();
+        logger.info("Updasted name :" + name);
+        assertEquals(name, updatedName, "Expected updated First name");
+        logger.info("Test testUpdateCell finished");
     }
     @Test
     @DisplayName("Test : sorting by Age")
     public void testSortingByAge(){
+        logger.info("Test testSortingByAge started");
         tabledivPage.sortingByAge();
         table = tabledivPage.refreshTable();
         List<Integer> ages = table.stream()
-                .map(Webtable::getAge) // Получение значения поля age для каждого объекта
+                .map(Webtable::getAge) // Get field value for each object
                 .collect(Collectors.toList());
         boolean isSortedAscending = IntStream.range(0, ages.size() - 1)
                 .allMatch(i -> ages.get(i) <= ages.get(i + 1));
         assertTrue(isSortedAscending, "Expected True");
+        logger.info("Test testSortingByAge finished");
     }
 }
