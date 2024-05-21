@@ -1,12 +1,14 @@
 package webtest.demoqa.com.tasks.elements.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class ButtonsPage {
-    private WebDriver driver;
-    private Actions action;
+public class ButtonsPage extends BasePage {
+    private static final Logger logger = LogManager.getLogger(ButtonsPage.class);
     private final By doubleMeButton = By.xpath("//button[@id='doubleClickBtn']");
     private final By rightMeButton = By.xpath("//button[@id='rightClickBtn']");
     private final By clickMe = By.xpath("//button[text()='Click Me']");
@@ -15,26 +17,37 @@ public class ButtonsPage {
     private final By dynamicClickMessage = By.xpath("//p[@id='dynamicClickMessage']");
 
     public ButtonsPage(WebDriver driver) {
-        this.driver = driver;
-        action = new Actions(driver);
-    }
-    public void clickOnDouble(){
-        action.doubleClick(driver.findElement(doubleMeButton)).perform();
-    }
-    public void clickOnRight(){
-        action.contextClick(driver.findElement(rightMeButton)).perform();
-    }
-    public void clickMe(){
-        driver.findElement(clickMe).click();
+        super(driver);
+        logger.info("ButtonsPage initialized");
     }
 
-    public String getDoubleClickMessage(){
-        return driver.findElement(doubleClickMessage).getText();
+    public void clickOnDouble() {
+        logger.info("Double clicking");
+        WebElement element = waitForElementToBeClickable(doubleMeButton);
+        new Actions(driver).doubleClick(element).perform();
     }
-    public String getRightClickMessage(){
-        return driver.findElement(rightClickMessage).getText();
+
+    public void clickOnRight() {
+        logger.info("Right clicking");
+        WebElement element = waitForElementToBeClickable(rightMeButton);
+        new Actions(driver).contextClick(element).perform();
     }
-    public String getDynamicClickMessage(){
-        return driver.findElement(dynamicClickMessage).getText();
+
+    public void clickMe() {
+        logger.info("Click on element");
+        WebElement element = waitForElementToBeClickable(clickMe);
+        element.click();
+    }
+
+    public String getDoubleClickMessage() {
+        return waitForElementToBeVisible(doubleClickMessage).getText();
+    }
+
+    public String getRightClickMessage() {
+        return waitForElementToBeVisible(rightClickMessage).getText();
+    }
+
+    public String getDynamicClickMessage() {
+        return waitForElementToBeVisible(dynamicClickMessage).getText();
     }
 }

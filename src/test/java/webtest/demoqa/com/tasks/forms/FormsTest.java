@@ -15,9 +15,6 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
-import io.qameta.allure.junit5.AllureJunit5;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 //@ExtendWith(AllureJunit5.class)
 public class FormsTest {
     WebDriver driver;

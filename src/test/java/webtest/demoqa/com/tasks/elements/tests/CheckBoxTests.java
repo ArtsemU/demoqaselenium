@@ -1,28 +1,25 @@
 package webtest.demoqa.com.tasks.elements.tests;
 
-import org.junit.jupiter.api.AfterEach;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import webtest.demoqa.com.tasks.elements.pages.CheckBoxPage;
 import webtest.enums.CheckBoxElements;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class CheckBoxTests {
-    WebDriver driver;
-    CheckBoxPage checkBoxPage;
-    JavascriptExecutor jse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    private boolean isInElementEnum(List<WebElement> elements){
-        if(elements.isEmpty()){
+public class CheckBoxTests extends BaseTest {
+    private CheckBoxPage checkBoxPage;
+    private static final Logger logger = LogManager.getLogger(CheckBoxTests.class);
+    private boolean isInElementEnum(List<WebElement> elements) {
+        logger.info("Check if <element> present in the Enum list");
+        if (elements.isEmpty()) {
             return false;
         }
 
@@ -35,66 +32,63 @@ public class CheckBoxTests {
                 }
             }
             if (!found) {
-                System.out.println("Missing element : " + element.getText());
+                logger.error("Missing element : " + element.getText());
                 return false;
             }
         }
         return true;
     }
-    private boolean isReact(List<WebElement> elements){
-        if(elements.size() != 1){
+
+    private boolean isReact(List<WebElement> elements) {
+        if (elements.size() != 1) {
+            logger.error("Element size is incorrect");
             return false;
         }
-        return elements.get(0).getText().equals(CheckBoxElements.REACT.getValue());
+        logger.info("Return true if element equals");
+        return CheckBoxElements.REACT.getValue().equals(elements.get(0).getText());
     }
 
     @BeforeEach
-    public  void setUp(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void setUp() {
+        logger.info("Setup method BeforeEach");
+        super.setUp();
         driver.get("https://demoqa.com/checkbox");
-        jse = (JavascriptExecutor)driver;
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         checkBoxPage = new CheckBoxPage(driver);
-    }
-
-    @AfterEach
-    public void close(){
-        driver.quit();
+        jse.executeScript("window.scrollBy(0,400)");
     }
 
     @Test
     @DisplayName("Test : Choose All")
-    public void testChooseAll(){
-        //checkBoxPage = new CheckBoxPage(driver);
-        jse.executeScript("window.scrollBy(0,300)");
+    public void testChooseAll() {
+        logger.info("Test testChooseAll started");
         checkBoxPage.clickOnHome();
-        checkBoxPage.returnResultList();
-        List<WebElement> list = checkBoxPage.returnResultList();
+        List<WebElement> list = checkBoxPage.getResultList();
         assertTrue(isInElementEnum(list), "Some element is missing");
+        logger.info("Test testChooseAll finished");
     }
 
     @Test
     @DisplayName("Test : Expand root element and choose Documents")
-    public void testExpandRootChooseDocuments(){
-        //checkBoxPage = new CheckBoxPage(driver);
-        jse.executeScript("window.scrollBy(0,400)");
+    public void testExpandRootChooseDocuments() {
+        logger.info("Test testExpandRootChooseDocuments started");
         checkBoxPage.expandHomeRoot();
         checkBoxPage.clickOnDocuments();
-        List<WebElement> list = checkBoxPage.returnResultList();
+        List<WebElement> list = checkBoxPage.getResultList();
         assertTrue(isInElementEnum(list), "Some element is missing");
+        logger.info("Test testExpandRootChooseDocuments finished");
     }
 
     @Test
     @DisplayName("Test : Expand root and choose React")
-    public void testExpandRootChooseReact(){
-        //checkBoxPage = new CheckBoxPage(driver);
-        jse.executeScript("window.scrollBy(0,400)");
+    public void testExpandRootChooseReact() {
+        logger.info("Test testExpandRootChooseReact started");
         checkBoxPage.expandHomeRoot();
         checkBoxPage.expandDocumentsRoot();
         checkBoxPage.expandWorkSpace();
         checkBoxPage.chooseReact();
-        List<WebElement> list = checkBoxPage.returnResultList();
+        List<WebElement> list = checkBoxPage.getResultList();
         assertTrue(isReact(list), "No such element");
+        logger.info("Test testExpandRootChooseReact finished");
     }
 }
