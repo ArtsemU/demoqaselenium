@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TabledivPage extends BasePage{
     private static final Logger logger = LogManager.getLogger(TabledivPage.class);
-    WebDriver driver;
+    //WebDriver driver;
     List<Webtable> webtables;
     By tableCells = By.xpath("//div[@role='gridcell']");
     By tableRows = By.className("rt-tr-group");
@@ -77,7 +77,7 @@ public class TabledivPage extends BasePage{
         List<WebElement> rows = driver.findElements(tableRows);
         webtables = new ArrayList<>();
         int rowCount = rows.size();
-
+        logger.info("Table size :" + rowCount);
         for (int i = 0; i < rowCount; i++) {
             WebElement row = rows.get(i);
 
@@ -101,7 +101,7 @@ public class TabledivPage extends BasePage{
     }
 
     public Integer getTableSize(){
-        logger.info("Get table size");
+        logger.info("Get table size as" + webtables.size());
         return webtables.size();
     }
 

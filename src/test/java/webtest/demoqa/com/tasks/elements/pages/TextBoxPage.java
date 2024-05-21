@@ -61,7 +61,7 @@ public class TextBoxPage extends BasePage{
     public boolean isNamePresent() {
         try {
             logger.info("Check Name available");
-            driver.findElement(resultName);
+            waitForElementToBeVisible(resultName);
             return true; // Element found
         } catch (NoSuchElementException e) {
             logger.error("Name was not found");
@@ -71,7 +71,7 @@ public class TextBoxPage extends BasePage{
     public boolean isCurrAddressPresent() {
         try {
             logger.info("Check Address available");
-            driver.findElement(resultCurrentAddress);
+            waitForElementToBeVisible(resultCurrentAddress);
             return true; // Element found
         } catch (NoSuchElementException e) {
             logger.error("Address was not found");

@@ -24,7 +24,7 @@ public class UploadDownloadPage extends BasePage{
         logger.info("UploadDownloadPage initialized");
     }
     public void uploadFile(String path){
-        logger.info("Up;oad a file with path :" + path);
+        logger.info("Upload a file with path :" + path);
         waitForElementToBeVisible(uploadFile).sendKeys(path);
     }
     public String getUploadedFile(){
