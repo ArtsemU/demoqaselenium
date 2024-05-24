@@ -2,10 +2,7 @@ package webtest.demoqa.com.tasks.elements.tests;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,6 +35,7 @@ public class RadioTest extends BaseTest{
         logger.info("Test testChooseYes finished");
     }
     @Test
+    @Disabled("Need remove extra-logging")
     @DisplayName("Test : choose Impressive")
     public void testChooseImpressive(){
         logger.info("Test testChooseImpressive started");

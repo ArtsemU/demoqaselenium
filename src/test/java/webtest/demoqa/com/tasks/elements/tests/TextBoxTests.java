@@ -48,6 +48,7 @@ public class TextBoxTests extends BaseTest{
     }
 
     @Test
+    @Tag("test")
     @DisplayName("Fill in text area")
     public void testTextArea(){
         logger.info("Test testTextArea started");
