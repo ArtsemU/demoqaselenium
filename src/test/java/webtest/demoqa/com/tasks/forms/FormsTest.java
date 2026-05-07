@@ -63,6 +63,7 @@ public class FormsTest {
         formsPage.setState(NCR);
         formsPage.setCity(NOIDA);
         formsPage.submit();
+
         assertEquals(TITLE, sbmForm.getTitle(), String.format("Expected title: %s, but received: %s", TITLE, sbmForm.getTitle()));
         assertEquals("FirstName LastName", sbmForm.getSubmittedName(), "Expected name: FirstName LastName, but received: " + sbmForm.getSubmittedName());
         assertEquals("email@gmail.com", sbmForm.getSubmittedEmail(), "Expected email: email@gmail.com, but received: " + sbmForm.getSubmittedEmail());

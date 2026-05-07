@@ -28,7 +28,7 @@ public class FormsPage {
     private By upload = By.id("uploadPicture");
     private By currAddress = By.id("currentAddress");
     private By state = By.xpath("//div[@id='state']//input");
-    private By city = By.xpath("//div[@id='city']//input");
+    private By city = By.xpath("//div[@id='city']//input[4]");
     private By submit = By.xpath("//button[@id='submit']");
 
     public FormsPage(WebDriver driver){
