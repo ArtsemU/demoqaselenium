@@ -6,7 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import webtest.demoqa.com.tasks.elements.pages.ButtonsPage;
+import webtest.test.DriverFactory;
+
+import java.net.MalformedURLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

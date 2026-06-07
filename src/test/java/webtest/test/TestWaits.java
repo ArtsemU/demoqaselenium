@@ -25,7 +25,7 @@ public class TestWaits {
     public void setUp() throws Exception {
         driver = new ChromeDriver();
         baseUrl = "http://www.google.com";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test

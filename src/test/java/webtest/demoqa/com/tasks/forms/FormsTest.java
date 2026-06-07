@@ -31,7 +31,7 @@ public class FormsTest {
     public void setUp(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://demoqa.com/automation-practice-form");
         formsPage = new FormsPage(driver);
         jse = (JavascriptExecutor)driver;
