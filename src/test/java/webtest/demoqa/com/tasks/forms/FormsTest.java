@@ -46,6 +46,12 @@ public class FormsTest {
         }
     }
 
+    /**
+     * Fills in every field of the practice form (name, email, gender, mobile,
+     * date of birth, subject, hobbies, file upload, address, state and city),
+     * submits it, and verifies that the confirmation modal shows the correct
+     * value for each field.
+     */
     @Test
     @DisplayName("Test : fillin form")
     public void testFillinForm(){
@@ -76,6 +82,11 @@ public class FormsTest {
         assertEquals("Hello World! Have a good day!", sbmForm.getAddress(), String.format("Expected Address: %s, but received: %s", "Hello World! Have a good day!", sbmForm.getAddress()));
         assertEquals(NCR + " " + NOIDA, sbmForm.getStateCity(), String.format("Expected State and City: %s, but received: %s", NCR + " " + NOIDA, sbmForm.getStateCity()));
     }
+    /**
+     * Compares a date shown on screen (format "dd MMM,yyyy", e.g. "01 May,2010")
+     * with a compact input date string (format "ddMMMyyyy", e.g. "01MAY2010").
+     * Returns true when both represent the same calendar day.
+     */
     public static boolean areDatesEqual(String displayedDateString, String inputDateString) {
         SimpleDateFormat displayDateFormat = new SimpleDateFormat("dd MMM,yyyy");
         SimpleDateFormat inputDateFormat = new SimpleDateFormat("ddMMMyyyy");
