@@ -28,7 +28,7 @@ public class FormsPage {
     private By upload = By.id("uploadPicture");
     private By currAddress = By.id("currentAddress");
     private By state = By.xpath("//div[@id='state']//input");
-    private By city = By.xpath("//div[@id='city']//input[4]");
+    private By city = By.xpath("//div[@id='city']//input");
     private By submit = By.xpath("//button[@id='submit']");
 
     public FormsPage(WebDriver driver){
@@ -52,7 +52,7 @@ public class FormsPage {
     }
     public void setDob(){
         driver.findElement(dob).sendKeys(Keys.chord(Keys.CONTROL, "A"));
-        driver.findElement(dob).sendKeys("01MAY2010");
+        driver.findElement(dob).sendKeys("01 May 2010");
         driver.findElement(dob).sendKeys(Keys.ENTER);
     }
     public void setSubject(String sbj){
