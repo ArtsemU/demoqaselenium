@@ -1,9 +1,6 @@
 package webtest.demoqa.com.tasks.sandbox;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Sandbox3 {
@@ -44,5 +41,30 @@ public class Sandbox3 {
                 .map(Student::getName)
                 .collect(Collectors.toList());
         System.out.println(testMethod);
+
+        List<Student> scoreList = students.stream()
+                .filter(p -> p.getResult() > 20)
+                .sorted(Comparator.comparing(Student::getName))
+                .collect(Collectors.toList());
+        System.out.println(scoreList);
+
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Ivan", 85);
+        scores.put("Anna", 92);
+        scores.put("Max", 78);
+
+        Set<Map.Entry<String, Integer>> entries = scores.entrySet();   // получили Set
+
+        for (Map.Entry<String, Integer> entry : entries) {
+            if (entry.getKey().equals("Anna")) {
+                System.out.println("Нашли Anna, результат: " + entry.getValue());
+            }
+        }
+        System.out.println("////////////");
+        for(Map.Entry<String, Integer> e : entries) {
+            if(e.getValue() > 20) {
+                System.out.println(e.getKey());
+            }
+        }
     }
 }
